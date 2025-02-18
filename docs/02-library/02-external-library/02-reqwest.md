@@ -9,6 +9,7 @@
 reqwest = { version = "0.11", features = ["json", "blocking", "stream"] }
 tokio = { version = "1", features = ["full"] } # Needed for async
 serde = { version = "1", features = ["derive"] } # Needed for JSON serialization
+serde_json = "1.0.138"
 ```
 
 ---
@@ -149,6 +150,9 @@ async fn main() -> Result<(), reqwest::Error> {
     let client = Client::new();
 
     let response = client.delete("https://jsonplaceholder.typicode.com/posts/1")
+        .json(&json!({
+            "userId": 1
+        }))
         .send()
         .await?
         .text()
@@ -176,6 +180,7 @@ async fn main() -> Result<(), reqwest::Error> {
 
     let response = client.get("https://jsonplaceholder.typicode.com/posts/1")
         .header(header::USER_AGENT, "MyRustApp/1.0")
+        .header(header::RANGE, "bytes=0-499")
         .send()
         .await?
         .text()
@@ -202,15 +207,15 @@ use tokio::io::AsyncWriteExt; // For writing to file
 async fn main() -> Result<(), reqwest::Error> {
     let client = Client::new();
 
-    let mut response = client.get("https://speed.hetzner.de/100MB.bin")
+    let mut response = client
+        .get("https://avatars.githubusercontent.com/u/76887609")
         .send()
-        .await?
-        .bytes_stream();
+        .await?;
 
-    let mut file = tokio::fs::File::create("downloaded_file.bin").await?;
+    let mut file = tokio::fs::File::create("downloaded_file.jpg").await.unwrap();
 
-    while let Some(chunk) = response.next().await {
-        file.write_all(&chunk?).await?;
+    while let Some(chunk) = response.chunk().await? {
+        file.write_all(&chunk).await.unwrap();
     }
 
     println!("Download complete!");

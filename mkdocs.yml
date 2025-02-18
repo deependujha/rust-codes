@@ -132,3 +132,4 @@ nav:
       - External Library:
         - Rand: 02-library/02-external-library/01-rand.md
         - Reqwest: 02-library/02-external-library/02-reqwest.md
+        - Indicatif: 02-library/02-external-library/03-indicatif.md
