@@ -21,17 +21,28 @@ cargo add rand
 
 ---
 
-## **1️⃣ Basic Random Number Generation**
+## **1️⃣ Basic Random Number & Char Generation**
 
 ```rust
 use rand::random;
+use rand::Rng;
 
 fn main() {
     let random_u8: u8 = random(); // Generates a random u8
     let random_bool: bool = random(); // Generates a random bool
+    let random_float: f32 = random(); // Generates a random float
 
     println!("Random u8: {}", random_u8);
     println!("Random bool: {}", random_bool);
+    println!("Random float: {}", random_float);
+
+    // Get an RNG:
+    let mut rng = rand::rng();
+
+    // Try printing a random unicode code point (probably a bad idea)!
+    println!("char: '{}'", rng.random::<char>());
+    // Try printing a random alphanumeric value instead!
+    println!("alpha: '{}'", rng.sample(rand::distr::Alphanumeric) as char);
 }
 ```
 
@@ -47,15 +58,20 @@ fn main() {
 use rand::Rng;
 
 fn main() {
-    let mut rng = rand::thread_rng(); // Get the thread-local RNG
+    let mut rng = rand::rng(); // Get the thread-local RNG
 
-    let num: i32 = rng.gen(); // Random i32
-    let num_range: i32 = rng.gen_range(1..=100); // Random i32 in range 1-100
+    let num: i32 = rng.random(); // Random i32
+    let num_range: i32 = rng.random_range(1..=100); // Random i32 in range 1-100
+    let float_range: f32 = rng.random_range(5.5..=7.5); // Random f32 in range 5.5-7.5
 
     println!("Random i32: {}", num);
     println!("Random i32 in range 1-100: {}", num_range);
+    println!("Random i32 in range 5.5-7.5: {}", float_range);
 }
 ```
+
+!!! note
+    The above code in section:1 is just a shorthand for `rng.random` (section:2).
 
 | Method | Description |
 |--------|------------|
@@ -65,40 +81,25 @@ fn main() {
 
 ---
 
-## **3️⃣ Random Floating-Point Numbers**
+## **3️⃣ Random Choice from a List**
 
 ```rust
-use rand::Rng;
-
-fn main() {
-    let mut rng = rand::thread_rng();
-
-    let f1: f32 = rng.gen(); // Random f32 in range [0.0, 1.0)
-    let f2: f64 = rng.gen_range(5.5..10.5); // Random f64 in range [5.5, 10.5)
-
-    println!("Random f32: {}", f1);
-    println!("Random f64 in range 5.5-10.5: {}", f2);
-}
-```
-
-| Method | Description |
-|--------|------------|
-| `.gen::<f32>()` | Generates a float in `[0.0, 1.0)` |
-| `.gen_range(a..b)` | Generates a float in `[a, b)` |
-
----
-
-## **4️⃣ Random Choice from a List**
-
-```rust
-use rand::seq::SliceRandom;
+use rand::seq::IndexedRandom;
 
 fn main() {
     let choices = ["🍎", "🍌", "🍊", "🍉"];
-    let mut rng = rand::thread_rng();
+    let mut rng = rand::rng();
 
-    if let Some(random_fruit) = choices.choose(&mut rng) {
-        println!("Random fruit: {}", random_fruit);
+    for _ in 1..10 {
+        if let Some(random_fruit) = choices.choose(&mut rng) {
+            println!("Random fruit: {}", random_fruit);
+        }
+    }
+
+    println!("============");
+    let my_choices = choices.choose_multiple(&mut rng, 3);
+    for f in my_choices {
+        println!("{f}")
     }
 }
 ```
@@ -106,20 +107,25 @@ fn main() {
 | Method | Description |
 |--------|------------|
 | `.choose(&mut rng)` | Picks a random element from a slice |
+| `.choose_multiple(&mut rng, amount: usize)` | Picks multiple random element from a slice |
 
 ---
 
-## **5️⃣ Shuffling a List**
+## **4️⃣ Shuffling a List**
 
 ```rust
 use rand::seq::SliceRandom;
 
 fn main() {
-    let mut numbers = [1, 2, 3, 4, 5];
-    let mut rng = rand::thread_rng();
+    let mut choices = ["🍎", "🍌", "🍊", "🍉"];
+    let mut rng = rand::rng();
 
-    numbers.shuffle(&mut rng);
-    println!("Shuffled: {:?}", numbers);
+    for _ in 1..5 {
+        choices.shuffle(&mut rng);
+
+        println!("{choices:?}");
+        println!("=======");
+    }
 }
 ```
 
@@ -129,13 +135,15 @@ fn main() {
 
 ---
 
-## **6️⃣ Randomly Sampling Elements**
+## **5️⃣ Randomly Sampling Elements**
+
+- Pick 3 unique indices from range 0-9.
 
 ```rust
 use rand::seq::index::sample;
 
 fn main() {
-    let mut rng = rand::thread_rng();
+    let mut rng = rand::rng();
     let indices = sample(&mut rng, 10, 3); // Pick 3 unique indices from range 0-9
 
     println!("Random indices: {:?}", indices.into_iter().collect::<Vec<_>>());
@@ -148,41 +156,23 @@ fn main() {
 
 ---
 
-## **7️⃣ Secure Random Numbers (Cryptographic RNG)**
+## **6️⃣ Using a Seeded RNG for Reproducibility**
 
 ```rust
-use rand::rngs::OsRng;
-use rand::RngCore;
-
-fn main() {
-    let mut rng = OsRng;
-    let mut bytes = [0u8; 16]; // 16 random bytes
-
-    rng.fill_bytes(&mut bytes);
-    println!("Secure random bytes: {:?}", bytes);
-}
-```
-
-| Method | Description |
-|--------|------------|
-| `OsRng` | Cryptographically secure RNG |
-| `.fill_bytes(&mut buf)` | Fills a buffer with random bytes |
-
----
-
-## **8️⃣ Using a Seeded RNG for Reproducibility**
-
-```rust
-use rand::{SeedableRng, Rng};
 use rand::rngs::StdRng;
+use rand::{Rng, SeedableRng};
 
 fn main() {
     let seed = [42; 32]; // A fixed seed (must be 32 bytes)
     let mut rng = StdRng::from_seed(seed);
 
-    println!("Seeded random number: {}", rng.gen::<u32>());
+    println!("Seeded random number: {}", rng.random::<u32>());
+    println!("Seeded random number: {}", rng.random::<u32>());
+    println!("Seeded random number: {}", rng.random::<u32>());
 }
 ```
+
+- Everytime you run this executable, the generated random number in each run will be same following the order.
 
 | Method | Description |
 |--------|------------|
@@ -190,55 +180,51 @@ fn main() {
 
 ---
 
-## **9️⃣ Random Boolean Generation**
+## **7️⃣ Random Boolean Generation**
+
+- Return a bool with a probability p of being true.
 
 ```rust
-use rand::Rng;
-
+use rand;
 fn main() {
-    let mut rng = rand::thread_rng();
+    
+    let mut count: u32 = 0;
+    for _ in 1..100{
+        let guess = rand::random_bool(0.3);
 
-    let coin_flip = rng.gen_bool(0.5); // 50% chance of true
-    println!("Coin flip result: {}", coin_flip);
+        println!("Random guess is: {guess}");
+        if guess{
+            count+=1;
+        }
+    }
+    println!("Got it correct for: {count} out of 100.")
 }
 ```
 
 | Method | Description |
 |--------|------------|
-| `.gen_bool(p)` | Returns `true` with probability `p` |
+| `.random_bool(p)` | Returns `true` with probability `p` |
 
 ---
 
-## **🔟 Custom Probability Distributions**
+## **8️⃣ Custom Probability Distributions**
 
 ```rust
-use rand::distributions::{Distribution, Normal};
+use rand::distr::{Bernoulli, Distribution};
 
 fn main() {
-    let mut rng = rand::thread_rng();
-    let normal = Normal::new(10.0, 2.0).unwrap(); // Mean = 10, Std Dev = 2
+    let mut rng = rand::rng();
+    let bernoulli_experiment = Bernoulli::new(0.34).unwrap();
 
-    let random_value = normal.sample(&mut rng);
-    println!("Normally distributed value: {}", random_value);
+    for _ in 1..6 {
+        let random_value = bernoulli_experiment.sample(&mut rng);
+
+        println!("Bernoulli experiment random value: {}", random_value);
+    }
 }
 ```
 
 | Method | Description |
 |--------|------------|
-| `Normal::new(mean, std_dev)` | Creates a normal distribution |
+| `Bernoulli::new(mean, std_dev)` | Creates a Bernoulli distribution |
 | `.sample(&mut rng)` | Generates a sample |
-
----
-
-## **📌 Summary**
-
-| Category | Method |
-|----------|--------|
-| **Basic RNG** | `random::<T>()`, `.gen::<T>()` |
-| **Ranged Values** | `.gen_range(a..b)`, `.gen_range(a..=b)` |
-| **Lists** | `.choose(&mut rng)`, `.shuffle(&mut rng)` |
-| **Sampling** | `.sample(&mut rng, total, count)` |
-| **Secure RNG** | `OsRng.fill_bytes(&mut buf)` |
-| **Seeding** | `StdRng::from_seed(seed)` |
-| **Booleans** | `.gen_bool(prob)` |
-| **Distributions** | `Normal::new(mean, std_dev)` |
