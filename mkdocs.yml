@@ -130,4 +130,5 @@ nav:
       - Standard Library:
         - Some File: 02-library/01-standard-library/some-file.md
       - External Library:
-        - Reqwest: 02-library/02-external-library/01-reqwest.md
+        - Rand: 02-library/02-external-library/01-rand.md
+        - Reqwest: 02-library/02-external-library/02-reqwest.md
