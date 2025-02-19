@@ -130,12 +130,12 @@ nav:
       - Standard Library:
         - Some File: 02-library/01-standard-library/some-file.md
       - External Library:
-        - Rand: 02-library/02-external-library/01-rand.md
-        - Reqwest: 02-library/02-external-library/02-reqwest.md
-        - Indicatif: 02-library/02-external-library/03-indicatif.md
-        - Tokio: 02-library/02-external-library/04-tokio.md
-        - Futures: 02-library/02-external-library/05-futures.md
-        - SerDe: 02-library/02-external-library/06-serde.md
-        - PyO3: 02-library/02-external-library/07-pyo3.md
-        - Clap: 02-library/02-external-library/08-clap.md
-        - Rayon: 02-library/02-external-library/09-rayon.md
+        - Rand ✅: 02-library/02-external-library/01-rand.md
+        - Reqwest ✅: 02-library/02-external-library/02-reqwest.md
+        - Indicatif ✅: 02-library/02-external-library/03-indicatif.md
+        - Tokio ❌: 02-library/02-external-library/04-tokio.md
+        - Futures ❌: 02-library/02-external-library/05-futures.md
+        - SerDe ❌: 02-library/02-external-library/06-serde.md
+        - PyO3 ❌: 02-library/02-external-library/07-pyo3.md
+        - Clap ❌: 02-library/02-external-library/08-clap.md
+        - Rayon ❌: 02-library/02-external-library/09-rayon.md
