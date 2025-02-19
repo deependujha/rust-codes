@@ -139,3 +139,4 @@ nav:
         - PyO3 ❌: 02-library/02-external-library/07-pyo3.md
         - Clap ❌: 02-library/02-external-library/08-clap.md
         - Rayon ❌: 02-library/02-external-library/09-rayon.md
+        - Async: 02-library/02-external-library/async.md

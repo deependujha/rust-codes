@@ -4,6 +4,8 @@
 
 Tokio is an asynchronous runtime for Rust, designed for building fast and reliable network applications. It provides async/await support, efficient task scheduling, and various utilities for working with async operations.
 
+In async rust, it has a future trait, that implements poll method, and has two values done and pending. 
+
 ## 2. Setting Up Tokio
 
 To use Tokio in your Rust project, add the following to `Cargo.toml`:
@@ -232,5 +234,45 @@ fn main() {
     rt.block_on(async {
         println!("Using a multi-threaded Tokio runtime");
     });
+}
+```
+
+---
+
+## A good example
+
+```rust
+use tokio::time::{sleep, Duration};
+use futures::future::join_all;
+
+fn main() {
+    let rt = tokio::runtime::Runtime::new().unwrap();
+    let mut workers: Vec<tokio::task::JoinHandle<()>> = Vec::new();
+    for i in 0..2 {
+        let w = rt.spawn(worker(i));
+        workers.push(w);
+    }
+
+    separator();
+    // Wait for all workers to complete
+    rt.block_on(async {
+        join_all(workers).await;
+    });
+
+    separator();
+
+    println!("All done. Bye bye!");
+}
+
+async fn worker(id: u32) {
+    for i in 1..100 {
+        println!("Worker-{id} is working on idx-{i}");
+        sleep(Duration::from_millis(10)).await;
+    }
+}
+
+fn separator(){
+    let sep = String::from("=").repeat(50);
+    println!("{sep}");
 }
 ```

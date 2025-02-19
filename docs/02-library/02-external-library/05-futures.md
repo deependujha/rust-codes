@@ -11,6 +11,8 @@ The `futures` crate provides abstractions for asynchronous programming in Rust. 
 futures = "0.3"
 ```
 
+Then, run `cargo build`.
+
 ## 3. Basic Future Example
 
 ```rust
