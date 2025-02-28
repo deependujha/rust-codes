@@ -126,6 +126,7 @@ nav:
           - Some File: 01-basics/02-concepts/some-file.md
       - Data Structures:
           - Iterators: 01-basics/03-data-structures/01-iterators.md
+          - Strings: 01-basics/03-data-structures/02-strings.md
     - Library:
       - Standard Library:
         - Some File: 02-library/01-standard-library/some-file.md
