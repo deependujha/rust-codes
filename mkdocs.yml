@@ -127,6 +127,9 @@ nav:
       - Data Structures:
           - Iterators: 01-basics/03-data-structures/01-iterators.md
           - Strings: 01-basics/03-data-structures/02-strings.md
+      - Macros:
+        - Macro Plan: 01-basics/04-macros/macro-plan.md
+        - Declarative Macro: 01-basics/04-macros/01-declarative-macro.md
     - Library:
       - Standard Library:
         - Some File: 02-library/01-standard-library/some-file.md
