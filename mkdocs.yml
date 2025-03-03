@@ -127,7 +127,9 @@ nav:
       - Data Structures:
           - Iterators: 01-basics/03-data-structures/01-iterators.md
           - Strings: 01-basics/03-data-structures/02-strings.md
-          - Hashmap: 01-basics/03-data-structures/hashmap.md
+          - Hashmap: 01-basics/03-data-structures/03-hashmap.md
+          - Vectors: 01-basics/03-data-structures/04-vectors.md
+          - Bytes: 01-basics/03-data-structures/05-bytes.md
       - Macros:
         - Macro Plan: 01-basics/04-macros/macro-plan.md
         - Declarative Macro: 01-basics/04-macros/01-declarative-macro.md
