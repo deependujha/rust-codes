@@ -1,7 +1,3 @@
-Great! Here's a crisp, practical note on **Traits** in Rust — your go-to for quick revision and coding.
-
----
-
 # 🧬 Traits in Rust
 
 Traits are like **interfaces** in other languages. They define **shared behavior** that types can implement.
@@ -147,7 +143,3 @@ struct Point {
 | `Default`       | `::default()`                       |
 | `Drop`          | Custom destructor                   |
 | `From` / `Into` | Type conversions                    |
-
----
-
-Let me know if you want to go deeper into trait objects (`dyn Trait`) or how to use `From`/`Into` for type conversion.

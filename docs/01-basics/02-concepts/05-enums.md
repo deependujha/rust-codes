@@ -1,7 +1,3 @@
-Awesome! Here’s a clean and concise note on **Enums** in Rust, designed for quick revision and real-world coding:
-
----
-
 # 🎭 Rust Enums
 
 Enums allow you to define a type by enumerating its possible *variants*.
@@ -125,4 +121,125 @@ enum Status {
 
 ---
 
-Let me know if you want a follow-up on `Option`, `Result`, or custom error handling!
+## 🔥 `if-let` Syntax
+
+```rust
+    let config_max = Some(3u8);
+    match config_max {
+        Some(max) => println!("The maximum is configured to be {max}"),
+        _ => (),
+    }
+```
+
+can be simplified with `if let`:
+
+```rust
+    let config_max = Some(3u8);
+    if let Some(max) = config_max {
+        println!("The maximum is configured to be {max}");
+    }
+```
+
+---
+
+## 🙌🏻 `let-else` Syntax
+
+- original code:
+
+```rust
+fn describe_state_quarter(coin: Coin) -> Option<String> {
+    let state = if let Coin::Quarter(state) = coin {
+        state
+    } else {
+        return None;
+    };
+
+    if state.existed_in(1900) {
+        Some(format!("{state:?} is pretty old, for America!"))
+    } else {
+        Some(format!("{state:?} is relatively new."))
+    }
+}
+```
+
+- can be simplified with `let-else`:
+
+```rust
+fn describe_state_quarter(coin: Coin) -> Option<String> {
+    let Coin::Quarter(state) = coin else {
+        return None;
+    };
+
+    if state.existed_in(1900) {
+        Some(format!("{state:?} is pretty old, for America!"))
+    } else {
+        Some(format!("{state:?} is relatively new."))
+    }
+}
+```
+
+---
+
+## ❓ The `?` Operator in Rust
+
+The `?` operator is used to **propagate errors** in functions that return a `Result` or `Option`.
+
+---
+
+### ✅ For `Result`
+
+```rust
+fn read_file() -> Result<String, std::io::Error> {
+    let content = std::fs::read_to_string("file.txt")?; // if error, returns it early
+    Ok(content)
+}
+```
+
+* If `read_to_string` returns `Ok(val)`, `val` is assigned.
+* If it returns `Err(e)`, the whole function returns `Err(e)` early.
+
+Equivalent to:
+
+```rust
+let content = match std::fs::read_to_string("file.txt") {
+    Ok(c) => c,
+    Err(e) => return Err(e),
+};
+```
+
+---
+
+### ✅ For `Option`
+
+```rust
+fn get_first_char(s: &str) -> Option<char> {
+    let first = s.chars().next()?; // If None, return None early
+    Some(first)
+}
+```
+
+---
+
+### ✅ Requirements
+
+* The function must return a `Result<_, E>` or `Option<_>`.
+* The error type must implement `From` trait (auto for most common errors).
+* You can only use `?` inside functions that return compatible types.
+
+---
+
+### 🧠 Good For:
+
+* Cleaner error handling.
+* Early returns on error without boilerplate.
+
+---
+
+### TL;DR
+
+| Use Case | Behavior                       |
+| -------- | ------------------------------ |
+| `Result` | Return `Err(e)` early if error |
+| `Option` | Return `None` early if `None`  |
+
+Use `?` to write cleaner, less nested code when dealing with fallible operations.

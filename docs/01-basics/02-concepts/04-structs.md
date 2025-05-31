@@ -1,7 +1,3 @@
-Perfect — here’s a focused and clear set of notes on **Structs and Methods** in Rust, just like your earlier style.
-
----
-
 # 🏗️ Rust Structs & Methods
 
 ---
@@ -112,6 +108,30 @@ let m = Marker;
 
 > Used when you just want a type without data.
 
+!!! example
+    ```rust
+
+    struct JsonSerializer;
+
+    trait Serializer {
+        fn serialize(&self, data: &str) -> String;
+    }
+
+    impl Serializer for JsonSerializer {
+        fn serialize(&self, data: &str) -> String {
+            format!("{{\"data\": \"{}\"}}", data)
+        }
+    }
+    ```
+
+    Usage:
+
+    ```rust
+    let serializer = JsonSerializer;
+    println!("{}", serializer.serialize("hello"));
+    ```
+
+
 ---
 
 ## 🧬 Struct Update Syntax
@@ -146,7 +166,3 @@ struct Point {
 let p = Point { x: 3, y: 4 };
 println!("{:?}", p);
 ```
-
----
-
-Let me know if you want to go into enums, traits, or pattern matching on structs next!
