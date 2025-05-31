@@ -123,6 +123,7 @@ nav:
       - Project Setup:
         - Create & Run: 01-basics/01-project-setup/01-create-and-run.md
       - Concepts:
+          - Input & Output: 01-basics/02-concepts/00-input-and-output.md
           - Conditionals & Loops: 01-basics/02-concepts/01-conditionals-and-loops.md
       - Data Structures:
           - Iterators: 01-basics/03-data-structures/01-iterators.md
