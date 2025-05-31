@@ -127,6 +127,9 @@ nav:
           - Conditionals & Loops: 01-basics/02-concepts/01-conditionals-and-loops.md
           - Primitive Types: 01-basics/02-concepts/02-primitive-types.md
           - Bytes: 01-basics/02-concepts/03-bytes.md
+          - Structs: 01-basics/02-concepts/04-structs.md
+          - Enums: 01-basics/02-concepts/05-enums.md
+          - Traits: 01-basics/02-concepts/06-traits.md
       - Data Structures:
           - Iterators: 01-basics/03-data-structures/01-iterators.md
           - Strings: 01-basics/03-data-structures/02-strings.md
@@ -137,7 +140,9 @@ nav:
         - Declarative Macro: 01-basics/04-macros/01-declarative-macro.md
     - Library:
       - Standard Library:
-        - Some File: 02-library/01-standard-library/some-file.md
+        - OS: 02-library/01-standard-library/01-os.md
+        - Time: 02-library/01-standard-library/02-time.md
+        - Env Variables: 02-library/01-standard-library/03-env-variable.md
       - External Library:
         - Rand ✅: 02-library/02-external-library/01-rand.md
         - Reqwest ✅: 02-library/02-external-library/02-reqwest.md
