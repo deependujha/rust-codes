@@ -1,4 +1,4 @@
-# Rust I/O Basics: Print, Log, and Input
+# Rust I/O Basics: Output, and Input
 
 ## Printing to Console
 
