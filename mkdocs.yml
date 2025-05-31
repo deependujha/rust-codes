@@ -120,8 +120,8 @@ nav:
   - Rust Codes:
     - Home: index.md
     - Basics:
-      - Intro:
-        - Some File: 01-basics/01-intro/some-file.md
+      - Project Setup:
+        - Create & Run: 01-basics/01-project-setup/01-create-and-run.md
       - Concepts:
           - Some File: 01-basics/02-concepts/some-file.md
       - Data Structures:
