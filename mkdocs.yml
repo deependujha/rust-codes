@@ -144,18 +144,18 @@ nav:
         - Time: 02-library/01-standard-library/02-time.md
         - Env Variables: 02-library/01-standard-library/03-env-variable.md
       - External Library:
-        - Rand ✅: 02-library/02-external-library/01-rand.md
-        - Reqwest ✅: 02-library/02-external-library/02-reqwest.md
-        - Indicatif ✅: 02-library/02-external-library/03-indicatif.md
         - Tokio ❌: 02-library/02-external-library/04-tokio.md
         - Futures ❌: 02-library/02-external-library/05-futures.md
         - PyO3 ❌: 02-library/02-external-library/07-pyo3.md
         - Rayon ❌: 02-library/02-external-library/08-rayon.md
         - Async: 02-library/02-external-library/async.md
       - Utils Library:
+        - Rand : 02-library/03-utils-library/00-rand.md
         - Colored: 02-library/03-utils-library/01-colored.md
         - Clap : 02-library/03-utils-library/02-clap.md
         - SerDe : 02-library/03-utils-library/03-serde.md
+        - Indicatif : 02-library/03-utils-library/04-indicatif.md
+        - Reqwest : 02-library/03-utils-library/05-reqwest.md
     - Concurrency:
       - Multi-threading:
         - Introduction: 03-concurrency/01-multithreading/01-multithreading.md
