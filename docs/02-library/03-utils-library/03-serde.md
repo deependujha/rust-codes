@@ -52,6 +52,10 @@ fn main() {
 }
 ```
 
+!!! note
+    - The pound symbol `(#)` in `r#"{ "name": "Bob", "age": 30 }"#` is used in Rust to create a raw string literal.
+    - The `#"` and `"#` essentially tell Rust, **`This entire section in the middle is my string, and I don't want you to interpret any special characters within it. Just take it literally.`**
+
 ## 4. Handling Optionals & Defaults
 
 ```rust

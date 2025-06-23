@@ -149,13 +149,13 @@ nav:
         - Indicatif ✅: 02-library/02-external-library/03-indicatif.md
         - Tokio ❌: 02-library/02-external-library/04-tokio.md
         - Futures ❌: 02-library/02-external-library/05-futures.md
-        - SerDe ❌: 02-library/02-external-library/06-serde.md
         - PyO3 ❌: 02-library/02-external-library/07-pyo3.md
         - Rayon ❌: 02-library/02-external-library/08-rayon.md
         - Async: 02-library/02-external-library/async.md
       - Utils Library:
         - Colored: 02-library/03-utils-library/01-colored.md
         - Clap : 02-library/03-utils-library/02-clap.md
+        - SerDe : 02-library/03-utils-library/03-serde.md
     - Concurrency:
       - Multi-threading:
         - Introduction: 03-concurrency/01-multithreading/01-multithreading.md
