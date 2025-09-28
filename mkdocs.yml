@@ -161,5 +161,7 @@ nav:
         - Introduction: 03-concurrency/01-multithreading/01-multithreading.md
     - Advanced:
       - Build and FFI:
+        - WorkSpace: 04-advanced/01-build-and-ffi/00-workspace.md
         - Conditional Compilation: 04-advanced/01-build-and-ffi/01-conditional-compilation.md
         - Build Script: 04-advanced/01-build-and-ffi/02-build-rs.md
+        - Rust calling C code: 04-advanced/01-build-and-ffi/03-rust-calling-c-code.md
