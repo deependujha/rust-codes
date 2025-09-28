@@ -159,3 +159,7 @@ nav:
     - Concurrency:
       - Multi-threading:
         - Introduction: 03-concurrency/01-multithreading/01-multithreading.md
+    - Advanced:
+      - Build and FFI:
+        - Build Script: 04-advanced/01-build-and-ffi/01-build-rs.md
+        - Conditional Compilation: 04-advanced/01-build-and-ffi/02-conditional-compilation.md
