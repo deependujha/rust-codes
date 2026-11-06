@@ -46,9 +46,29 @@ theme:
     - toc.follow
     # - toc.integrate
   palette:
-    scheme: slate
-    primary: black
-    accent: black
+    # Palette toggle for automatic mode (follows system theme)
+    - media: "(prefers-color-scheme)"
+      primary: black
+      accent: black
+      toggle:
+        icon: material/brightness-auto
+        name: Switch to light mode
+    # Palette toggle for light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: black
+      accent: black
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    # Palette toggle for dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: black
+      accent: black
+      toggle:
+        icon: material/brightness-4
+        name: Switch to system preference
   font:
     text: Roboto
     code: Roboto Mono
