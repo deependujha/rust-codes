@@ -4,3 +4,39 @@ hr{
     height: 1px;
     border: 0;
 }
+
+/* ---------- Light mode: make header, tabs & footer follow the theme ---------- */
+[data-md-color-scheme="default"] .md-header,
+[data-md-color-scheme="default"] .md-tabs {
+    background-color: var(--md-default-bg-color);
+    color: var(--md-default-fg-color);
+}
+
+[data-md-color-scheme="default"] .md-header {
+    box-shadow: 0 0 0.2rem rgba(0, 0, 0, 0.1);
+}
+
+[data-md-color-scheme="default"] .md-tabs {
+    border-bottom: 1px solid var(--md-default-fg-color--lightest);
+}
+
+@media screen and (min-width: 60em) {
+    [data-md-color-scheme="default"] .md-search__form {
+        background-color: var(--md-default-fg-color--lightest);
+    }
+    [data-md-color-scheme="default"] .md-search__input,
+    [data-md-color-scheme="default"] .md-search__icon {
+        color: var(--md-default-fg-color);
+    }
+    [data-md-color-scheme="default"] .md-search__input::placeholder {
+        color: var(--md-default-fg-color--light);
+    }
+}
+
+[data-md-color-scheme="default"] {
+    --md-footer-fg-color: var(--md-default-fg-color);
+    --md-footer-fg-color--light: var(--md-default-fg-color--light);
+    --md-footer-fg-color--lighter: var(--md-default-fg-color--lighter);
+    --md-footer-bg-color: #f5f5f5;
+    --md-footer-bg-color--dark: #ebebeb;
+}
